@@ -1,4 +1,7 @@
-import serverless from "serverless-http";
-import app from "../src/server.js"; 
+import server from '../src/server.js'
 
-export default serverless(app);
+const PORT = process.env.PORT || 4000
+
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`)
+})
