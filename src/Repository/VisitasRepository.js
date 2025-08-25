@@ -6,15 +6,15 @@ export async function inserirVisita(dados) {
     const agora = new Date(); 
     const [resultados] = await connection.query(
 
-      `INSERT INTO visitas (local, sala, data) VALUES (?, ?, ?)`,
-      [dados.local, dados.sala, agora]
+      `INSERT INTO visitas (codigo, sala, data) VALUES (?, ?, ?)`,
+      [dados.codigo, dados.sala, agora]
     );
 
     return {
       id: resultados.insertId,
-      local: dados.local,
+      codigo: dados.codigo,
       sala: dados.sala,
-      data: new Date()
+      data: agora
     };
   } 
   
