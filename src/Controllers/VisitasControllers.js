@@ -7,8 +7,8 @@ const endpoints = Router()
 endpoints.post('/visitas', async (req, res) => {
     try {
         const dados = req.body;
-        if (!dados.local || !dados.sala) {
-            return res.status(400).json({ error: "Local e sala são obrigatórios." });
+        if (!dados.codigo || !dados.sala) {
+            return res.status(400).json({ error: "codigo e sala são obrigatórios." });
         }
 
         const visita = await inserirVisita(dados);

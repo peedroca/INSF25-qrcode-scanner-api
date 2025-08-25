@@ -1,11 +1,9 @@
 import connection from "./connection.js";
 
 export async function inserirVisita(dados) {
-
   try {
-    const agora = new Date(); 
+    const agora = new Date();
     const [resultados] = await connection.query(
-
       `INSERT INTO visitas (codigo, sala, data) VALUES (?, ?, ?)`,
       [dados.codigo, dados.sala, agora]
     );
@@ -16,13 +14,12 @@ export async function inserirVisita(dados) {
       sala: dados.sala,
       data: agora
     };
-  } 
-  
-  catch (err) {
+  } catch (err) {
     console.error("Erro ao inserir visita:", err);
     throw err;
   }
 }
+
 
 export async function buscarEstatisticasPorLocal() {
 
