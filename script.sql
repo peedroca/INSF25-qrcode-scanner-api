@@ -9,6 +9,16 @@ create table visitas (
   data DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+create table usuarios (
+    id int auto_increment primary key,
+    nome varchar(100),
+    email varchar(100) unique,
+    senha varchar(255),
+    tipo enum('admin', 'usuario') default 'usuario',
+    created_at timestamp default current_timestamp
+);
+
+
 insert into visitas (codigo, sala, data)
 values (?, ?, ?);
 
