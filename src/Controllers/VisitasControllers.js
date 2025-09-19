@@ -1,50 +1,48 @@
 import { Router } from "express";
+import { buscarEstatisticasPorLocal, inserirVisita, limparTodasVisitas } from '../Repository/VisitasRepository.js';
 
-import { buscarEstatisticasPorLocal, inserirVisita, limparTodasVisitas } from '../Repository/VisitasRepository.js'
-
-const endpoints = Router()
+const endpoints = Router();
 
 endpoints.post('/visitas', async (req, res) => {
-    try {
-        const dados = req.body;
-        if (!dados.codigo || !dados.sala) {
-            return res.status(400).json({ error: "codigo e sala são obrigatórios." });
-        }
-
-        const visita = await inserirVisita(dados);
-        res.status(201).json(visita);
+  try {
+    const dados = req.body;
+    if (!dados.codigo || !dados.sala) {
+      return res.status(400).json({ error: "codigo e sala são obrigatórios." });
     }
 
-    catch (err) {
-        console.error("Erro ao registrar visita:", err);
-        res.status(500).json({ error: "Erro ao registrar visita." });
-    }
+    const visita = await inserirVisita(dados);
+    res.status(201).json(visita);
+
+  } 
+  
+  catch (err) {
+    console.error("Erro ao registrar visita:", err);
+    res.status(500).json({ error: "Erro ao registrar visita." });
+  }
 });
 
 endpoints.get('/estatisticas', async (req, res) => {
-    try {
-        const resultados = await buscarEstatisticasPorLocal();
-
-        res.json(resultados);
-    }
-
-    catch (err) {
-        console.error("Erro ao buscar estatísticas:", err);
-
-        res.status(500).json({ error: "Erro ao buscar estatísticas" });
-    }
-})
+  try {
+    const resultados = await buscarEstatisticasPorLocal();
+    res.json(resultados);
+  } 
+  
+  catch (err) {
+    console.error("Erro ao buscar estatísticas:", err);
+    res.status(500).json({ error: "Erro ao buscar estatísticas" });
+  }
+});
 
 endpoints.delete('/estatisticas', async (req, res) => {
-    try {
-        const resultado = await limparTodasVisitas();
-        res.json(resultado);
-    } 
-    
-    catch (err) {
-        console.error("Erro ao limpar visitas:", err);
-        res.status(500).json({ error: "Erro ao limpar visitas." });
-    }
+  try {
+    const resultado = await limparTodasVisitas();
+    res.json(resultado);
+  } 
+  
+  catch (err) {
+    console.error("Erro ao limpar visitas:", err);
+    res.status(500).json({ error: "Erro ao limpar visitas." });
+  }
 });
 
 export default endpoints;
