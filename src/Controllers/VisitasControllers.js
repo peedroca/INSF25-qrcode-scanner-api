@@ -1,9 +1,11 @@
 import { Router } from "express";
+import { getAuthentication } from '../utils/jwt.js'
 import { buscarEstatisticasPorLocal, inserirVisita, limparTodasVisitas } from '../Repository/VisitasRepository.js';
 
 const endpoints = Router();
+const auth = getAuthentication();
 
-endpoints.post('/visitas', async (req, res) => {
+endpoints.post('/visitas', auth,  async (req, res) => {
   try {
     const dados = req.body;
     if (!dados.codigo || !dados.sala) {
@@ -21,7 +23,7 @@ endpoints.post('/visitas', async (req, res) => {
   }
 });
 
-endpoints.get('/estatisticas', async (req, res) => {
+endpoints.get('/estatisticas', auth, async (req, res) => {
   try {
     const resultados = await buscarEstatisticasPorLocal();
     res.json(resultados);
@@ -33,7 +35,7 @@ endpoints.get('/estatisticas', async (req, res) => {
   }
 });
 
-endpoints.delete('/estatisticas', async (req, res) => {
+endpoints.delete('/estatisticas', auth, async (req, res) => {
   try {
     const resultado = await limparTodasVisitas();
     res.json(resultado);

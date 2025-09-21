@@ -4,8 +4,8 @@
   "type": "module",
   "main": "api/index.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node api/index.js"
+    "dev": "nodemon local.js",
+    "start": "nodemon local.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

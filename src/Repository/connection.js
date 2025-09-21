@@ -2,10 +2,10 @@ import mysql from 'mysql2/promise'
 import 'dotenv/config'
 
 const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'qrdb2'
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PWD,
+    database: process.env.MYSQL_DB
 })
 
 console.log('Banco de Dados Subiu!')
