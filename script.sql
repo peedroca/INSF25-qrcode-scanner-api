@@ -5,18 +5,18 @@ drop database qrdb2;
 
 create table usuarios (
     id int auto_increment primary key,
-    nome varchar(100) not null,
+    nome varchar(100) ,
     email varchar(100) unique not null,
-    senha varchar(255) not null,
+    senha varchar(255) ,
     tipo enum('admin', 'usuario') default 'usuario',
     created_at timestamp default current_timestamp
 );
 
 create table visitas (
     id int auto_increment primary key,
-    codigo varchar(100) not null,
-    sala varchar(100) not null,
-    andar varchar(100) not null,
+    codigo varchar(100) ,
+    sala varchar(100) ,
+    andar varchar(100),
     data datetime default current_timestamp
 );
 
